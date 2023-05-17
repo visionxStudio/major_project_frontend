@@ -1,3 +1,7 @@
+.try-button {
+    width: 100%;
+ }
+ 
 .button {
     background-color: #4CAF50;
     border: none;
@@ -7,7 +11,8 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    /* margin: 4px 2px; */
+    margin-right: -72%;
     transition-duration: 0.4s;
     cursor: pointer;
     border: 2px solid red;
@@ -15,11 +20,11 @@
 }
 
 .button1 {
-    align-items: right;
     background-color: #1f252c;
     color: white;
     border: 2px solid #1f252c;
 }
+
 
 .button1:hover {
     background-color: white;
@@ -43,7 +48,10 @@
 }
 
 .caption_text {
+    width: 80%;
     letter-spacing: 1.1px;
+    margin-top: -5%;
+    margin-left: 10%;
     text-transform: uppercase;
     font-family: "Kanit";
     text-align: center;
@@ -71,22 +79,25 @@
     justify-items: center;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
+    width: 100%;
+    margin-top: -2%;
 
 }
 
 .main .fileupload {
-    width: 65%;
-    height: 65%;
-    object-fit: cover;
+    width: 75%;
+    height: 75%;
+    object-fit: contain;
     grid-area: 1 / 1;
 }
 
 .uploadText {
-    margin-top: -500px;
+    margin-top: -85%;
     z-index: 1;
     font-weight: 500;
     color: white;
     text-align: center;
+    align-items: center;
     cursor: pointer;
 
 }
@@ -101,4 +112,12 @@ label {
     border-radius: 0px;
     cursor: pointer;
     color: white;
+}
+ h2 {
+    font-family: "Kanit";
+    font-size: 32px;
+    letter-spacing: 1.1px;
+    margin-top: 10%;
+    text-transform: uppercase;
+    margin-bottom: 20%;
 }

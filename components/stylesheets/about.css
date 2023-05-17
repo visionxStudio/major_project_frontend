@@ -20,14 +20,17 @@
   .about-text {
     text-align: center;
     width: 700px;
+    margin-bottom: 5%;
 
     line-height: 40px;
     letter-spacing: -0.4px;
     font-size: 28px;
   }
   .icons-tag {
-    margin-top: 160px;
+    /* margin-top: 160px; */
+    margin-top: -180px;
     margin-bottom: 200px;
+    z-index: 10;
   }
   hr {
     width: 100%;
@@ -133,4 +136,8 @@
   }
   .bottom span {
     margin-left: 20px;
+  }
+
+  a {
+    text-decoration:  none;
   }

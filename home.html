@@ -4,10 +4,41 @@
 <head>
     <title>Vocal Remover & Instrumental AI Splitter | SPLITTER.AI</title>
     <link rel="shortcut icon" type="image/x-icon" href="assets/icons/favicon.ico" />
-    <!-- <link rel="stylesheet" href="components/stylesheets/splitter_upload.css" />
+    <link rel="stylesheet" href="components/stylesheets/splitter_upload.css" />
     <link rel="stylesheet" href="components/stylesheets/navigation_bar.css" />
     <link rel="stylesheet" href="components/stylesheets/general_components.css" />
-    <link rel="stylesheet" href="components/stylesheets/about.css" /> -->
+    <link rel="stylesheet" href="components/stylesheets/about.css" />
+
+    <style>
+        html,
+        body,
+        section,
+        div {
+            height: 100%;
+        }
+
+
+
+        .container {
+            margin-top: -5%;
+            display: table;
+            height: 100%;
+            width: 100%;
+        }
+
+        .div {
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+            width: 40%;
+            padding: 1rem;
+        }
+
+        .right-half {
+            padding-right: 10%;
+            width: 100%;
+        }
+    </style>
 
 </head>
 
@@ -29,20 +60,206 @@
         </nav>
     </header>
 
+    <section class="container">
+        <div class="div left-half">
+            <article>
+                <div class="main">
+                    <!-- <input class="fileupload" type="image" src="assets/images/circular.png" /> -->
+                    <img class="fileupload" src="assets/images/circular.png" alt="">
+                    <p class="uploadText">
+                        <input id="upload" hidden type="file" />
+                        <label for="upload" class="btn btn-primary" tabindex="2">Upload music File</label>
+                    </p>
+                    <input type="file" id="my_file" style="display: none" />
+                    <svg id="rotatingText" viewBox="0 0 200 200" width="500" height="500">
+                        <defs>
+                            <path id="circle" d="M 100, 100
+                                    m -75, 0
+                                    a 75, 75 0 1, 0 150, 0
+                                    a 75, 75 0 1, 0 -150, 0
+                                    "></path>
+                        </defs>
+                        <text width="500">
+                            <textPath alignment-baseline="top" xlink:href="#circle" class="text">
+                                • UPLOAD A TRACK • UPLOAD A TRACK • UPLOAD A TRACK •
+                            </textPath>
+                        </text>
+                    </svg>
+                </div>
 
-    <div class="row">
-        <div class="col">
-            <div class="leftside">
+                <!-- display text in light grey color -->
 
+                <p class="caption_text">
+                    We support mp3, wav, flac, aiff, aif, mp4a, and m4a formats. For the
+                    best results, upload in high resolution.
+                </p>
+
+
+            </article>
+        </div>
+        <div class="div right-half">
+            <article>
+
+                <h1 class="align-right">Get <br />
+                    Your
+                    <br />
+                    Stems
+                </h1>
+                <p class="description">
+                    For sync licensing, sampling, remastering, remixing, and <br /> re-imagining.
+                </p>
+                <style>
+                    .description {
+                        text-align: end;
+                        font-size: 12px;
+                        font-family: "Kanit";
+                        font-weight: 400;
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+
+                        letter-spacing: 1.1px;
+                        text-transform: uppercase;
+                        color: grey;
+                        margin-bottom: 24px;
+                    }
+                </style>
+                <div class="try-button">
+                    <button class="button button1"> <input id="upload" hidden type="file" />
+                        <label for="upload" tabindex="2">TRY FOR FREE</label></button>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- about section -->
+    <div class="about">
+        <div class="about-header">
+            <h2>What is audiosplitter.ai?</h2>
+        </div>
+        <div class="about-text">
+            <span>
+                A next-generation vocal remover and music source separation service
+                for fast, easy and precise stem extraction. Remove vocal and
+                instrumental, tracks without quality loss.
+            </span>
+        </div>
+        <img class="lower" src="assets/svg/loader-widget.svg" alt="">
+        <style>
+            .lower {
+                z-index: 1;
+                width: 100%;
+            }
+        </style>
+        <div class="icons-tag">
+            <img src="https://s.lalal.ai/img/home/logo_ai.svg" alt="image tag" />
+        </div>
+    </div>
+    <hr />
+    <!-- audio extract section  -->
+    <div class="quality">
+        <div class="quality-header">
+            <h2>Check the quality for yourself</h2>
+        </div>
+        <div class="box-container">
+            <div class="box">
+                <div class="box-content">
+                    <div class="box-inside">
+                        <img src="play.png" alt="" id="playbtn" />
+                        <span style="font-size: 30px">Sample</span>
+                    </div>
+
+                    <div id="waveform"></div>
+                </div>
             </div>
 
-            <div class="col">
-                <div class="rightside">
-                    
-                </div>
-        </div>
+            <div class="box">
+                <div class="box-content">
+                    <div class="box-inside">
+                        <img src="play.png" alt="" id="playbtn" />
+                        <span style="font-size: 30px">Sample</span>
+                    </div>
 
+                    <div id="waveform"></div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-content">
+                    <div class="box-inside">
+                        <img src="play.png" alt="" id="playbtn" />
+                        <span style="font-size: 30px">Sample</span>
+                    </div>
+
+                    <div id="waveform"></div>
+                </div>
+            </div>
+        </div>
     </div>
+    <hr />
+    <!-- Footer section -->
+    <div class="footer">
+        <div class="container">
+            <div class="top">
+                <div class="icons">
+                    <h2>follow us</h2>
+                    <a href="#" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-twitter"></a>
+                    <a href="#" class="fa fab fa-instagram"></a>
+                    <a href="#" class="fa fab fa-github"></a>
+                </div>
+                <div class="item">
+                    <h2>Explore</h2>
+                    <span>Help</span>
+                    <span>Pricing</span>
+                    <span>For Business</span>
+                    <span>Tools & API</span>
+                    <span>Support</span>
+                    <span>Affiliate Program</span>
+                </div>
+                <div class="item">
+                    <h2>Company</h2>
+                    <span>About</span>
+                    <span>Blog</span>
+                    <span>Media Kit</span>
+                    <span> Press </span>
+                </div>
+            </div>
+            <div class="bottom">
+                <span>© 2023 OmniSale GMBH</span>
+                <span>Terms of service</span>
+                <span>Privacy policy</span>
+                <span>Refund Policy</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var playbtn = document.getElementById("playbtn");
+    var wavesurfer = WaveSurfer.create({
+        container: "#waveform",
+        waveColor: "white",
+        progressColor: "yellow",
+        barWidth: 0.9,
+        height: 50,
+        barRedius: 4,
+    });
+
+    wavesurfer.load(
+        "https://s.lalal.ai/music/home/Lets_Call_it_by_LawrenceTrailer_cut.mp3"
+    );
+    playbtn.onclick = function () {
+        wavesurfer.playPause();
+        if (playbtn.src.includes("play.png")) {
+            playbtn.src = "/pause.png";
+        } else {
+            playbtn.src = "/play.png";
+        }
+        wavesurfer.on("finish", function () {
+            playbtn.src = "/play.png";
+            wavesurfer.stop();
+        });
+    };
+</script>
 
 </body>
 
