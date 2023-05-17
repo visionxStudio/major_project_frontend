@@ -35,7 +35,12 @@
   }
 
   .align-right {
+    margin-top: 50px;
     text-align: right;
     text-transform: uppercase;
     margin-bottom: 0;
   }
+
+
+
+  
