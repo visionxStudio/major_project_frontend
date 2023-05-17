@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: black;
+    }
+    .page {
+      width: 1440px;
+      height: 700px;
+      background-color: #e8e8e8;
+      margin: 40px 47px 40px 47px;
+    }
+    .page-back {
+      padding: 30px;
+      gap: 10px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+    .page-back span{
+      font-size: 17px;
+    }
+    .page-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    .page-left {
+      flex-direction: column;
+    }
+    .page-left h1 {
+      font-size: 45px;
+    }
+    .page-left h2 {
+      width: 600px;
+      margin-top: 40px;
+      font-size: 35px;
+    }
+    .page-left-text {
+      display: block;
+      justify-content: flex-start;
+      flex-direction: column;
+      margin-top: 30px;
+    }
+    .page-left-text p {
+      margin-bottom: 30px;
+      font-size: 30px;
+    }
+    .page-right {
+      width: 730px;
+      height: 500px;
+      background-color: #fff;
+    }
+    .page-right-header {
+      display: flex;
+      flex-direction: row;
+      margin-top: 10px;
+      font-weight: 600;
+      gap: 10px;
+    }
+    .page-right-header #duration {
+      margin-top: 7px;
+      gap: 20px;
+      font-size: 30px;
+    }
+    .page-right-header #last-duration {
+      margin-top: 7px;
+
+      font-size: 25px;
+      font-weight: 400;
+    }
+    .box-container {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: row;
+      margin-left: 20px;
+      flex-wrap: wrap;
+    }
+    .box {
+      height: 200px;
+      width: 605px;
+      background-color: gray;
+
+      margin: 7px;
+    }
+
+    .box-content {
+      display: flex;
+      flex-direction: column;
+
+      margin: 20px;
+      gap: 10px;
+    }
+    .box-inside {
+      display: flex;
+    }
+    .box-inside span{
+      font-size: 20px;
+    }
+   
+    .box-content img {
+      height: 25px;
+      width: 25px;
+      cursor: pointer;
+    }
+
+    /* volume controller */
+    .volume-controller {
+      margin-top: -42%;
+      margin-left: 9%;
+      width: 800px;
+      height: 300px;
+      transform: translate(300px, 100px);
+    }
+    .mike {
+      background-color: gray;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .mike img {
+      width: 40px;
+    }
+
+    .volume {
+      width: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    input {
+      margin-top: 40px;
+      border-radius: 5px;
+      z-index: -1;
+      width: 130px;
+      -webkit-appearance: none;
+      height: 60px;
+      background-color: gray;
+      outline: none;
+
+      overflow: hidden;
+      transform: rotate(270deg);
+    }
+    input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 0px;
+      background: yellow;
+      box-shadow: -300px 0 0 300px yellow;
+      cursor: pointer;
+    }
+
+    span {
+      z-index: 1;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .mute {
+      display: none;
+    }
+  </style>
+  <body>
+    <div class="page">
+      <div class="page-back">
+        <i class="fa fa-arrow-left"></i>
+        <span>Back</span>
+      </div>
+      <div class="page-container">
+        <div class="page-left">
+          <h1>Your previews are ready!</h1>
+          <h2>You can change the stem separation type below</h2>
+          <div class="page-left-text">
+            <p>Vocal and Instrumental</p>
+            <p>Vocal and Instrumental</p>
+            <p>Vocal and Instrumental</p>
+            <p>Vocal and Instrumental</p>
+            <p>Vocal and Instrumental</p>
+          </div>
+        </div>
+        <div class="page-right">
+          <div class="page-right-header">
+            <img src="play.png" alt="" id="playbtn"/>
+            <div id="duration">00:00</div>
+            <div id="last-duration">/ 01:00</div>
+          </div>
+          <div class="box-container">
+            <div class="box">
+              <div class="box-content">
+                <div class="box-inside">
+                  <img src="/drum.png" alt="" />
+                  <span >Drums</span>
+                </div>
+
+                <div id="waveform"></div>
+              </div>
+            </div>
+          </div>
+          <div class="volume-controller">
+            <div class="volume">
+              <div class="mike">
+                <a href=""><img src="volume-mute.png" alt="" /></a>
+              </div>
+              <input type="range" class="range" value="0" min="0" max="100" />
+              <span id="pervalue"></span>
+            </div>
+          </div>
+          <div class="box-container">
+            <div class="box">
+              <div class="box-content">
+                <div class="box-inside">
+                  <img src="/musical-note.png" alt=""  />
+                  <span >without Drums</span>
+                </div>
+
+                <div id="waveform"></div>
+              </div>
+            </div>
+          </div>
+          <div class="volume-controller">
+            <div class="volume">
+              <div class="mike">
+                <a href=""><img src="volume-mute.png" alt="" /></a>
+              </div>
+              <input type="range" class="range" value="0" min="0" max="100" />
+              <span id="pervalue"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    var playbtn = document.getElementById("playbtn");
+    var wavesurfer = WaveSurfer.create({
+      container: "#waveform",
+      waveColor: "white",
+      progressColor: "yellow",
+      barWidth: 0.9,
+      height: 50,
+      barRedius: 4,
+    });
+    wavesurfer.load(
+      "https://s.lalal.ai/music/home/Lets_Call_it_by_LawrenceTrailer_cut.mp3"
+    );
+    playbtn.onclick = function () {
+      wavesurfer.playPause();
+      if (playbtn.src.includes("play.png")) {
+        playbtn.src = "/pause.png";
+      } else {
+        playbtn.src = "/play.png";
+      }
+      wavesurfer.on("finish", function () {
+        playbtn.src = "/play.png";
+        wavesurfer.stop();
+      });
+    };
+
+    // for volume button
+
+    var line = document.getElementsByTagName("input")[0];
+    line.addEventListener("mousemove", function () {
+      var pervalue = document.getElementById("pervalue");
+      var sp = document.getElementsByTagName("span")[0];
+      if (line.value == 0) {
+        pervalue.innerHTML = "";
+        var sound = document.getElementsByClassName("sound");
+        for (var i = 0; i < sound.length; i++) {
+          sound[i].style.display = "none";
+        }
+        document.getElementById("mute").style.display = "block";
+      }
+      if (line.value > 0) {
+        pervalue.innerHTML = line.value;
+        var sound = document.getElementsByClassName("sound");
+        for (var i = 0; i < sound.length; i++) {
+          sound[i].style.display = "none";
+        }
+        document.getElementById("mute").style.display = "none";
+      }
+    });
+  </script>
+</html>
