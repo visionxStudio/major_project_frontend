@@ -13,72 +13,318 @@
       rel="stylesheet"
       href="components/stylesheets/general_components.css"
     />
-    <style>
-      .text {
-        /* font-weight: 400; */
-        letter-spacing: 4.8px;
-        text-transform: uppercase;
-        font-family: "Kanit";
-        font-size: 8px;
-        fill: #111;
-        /* text-shadow: 2px 0px #ccc; */
-      }
-
-      .caption_text {
-        letter-spacing: 1.1px;
-        text-transform: uppercase;
-        font-family: "Kanit";
-        font-size: 12px;
-        color: grey;
-      }
-
-      #rotatingText {
-        animation-name: rotate-circle;
-        animation-duration: 60s;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-        grid-area: 1 / 1;
-      }
-
-      @keyframes rotate-circle {
-        to {
-          transform: rotate(1turn);
-        }
-      }
-
-      .main {
-        display: grid;
-        align-items: center;
-        justify-items: center;
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr;
-      }
-
-      .main .fileupload {
-        width: 65%;
-        height: 65%;
-        object-fit: cover;
-        grid-area: 1 / 1;
-      }
-      .p {
-        margin-top: -500px;
-        z-index: 1;
-        margin-left: 100px;
-        font-weight: 500;
-        color: black;
-      }
-
-      label {
-        /* display: block; */
-        margin-bottom: 5px;
-      }
-      .p input[type="file"] {
-        border-radius: 3px;
-        cursor: pointer;
-      }
-    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://unpkg.com/wavesurfer.js"></script>
   </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #ececee;
 
+      background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg");
+      background-position: center;
+      background-repeat: repeat;
+      background-size: 4%;
+      height: 100vh;
+      width: 100%;
+    }
+    /* Home section */
+    .home {
+      z-index: 1;
+      height: calc(100vh - 50px);
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+    .left {
+      flex-direction: column;
+      margin-left: 150px;
+      width: 45%;
+      position: relative;
+    }
+
+    .left svg {
+      position: absolute;
+    }
+    .left span {
+      font-size: 10px;
+      font-family: "Kanit";
+      font-weight: 400;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+      color: grey;
+      margin-bottom: 24px;
+    }
+
+    .right {
+      flex-direction: column;
+      text-align: right;
+      margin-right: 150px;
+    }
+    h1 {
+      font-weight: 800;
+      font-size: 7vw;
+      line-height: 1;
+      color: #1f252c;
+      text-align: end;
+      -webkit-text-stroke: 2px #1f252c;
+      text-stroke: 2px #1f252c;
+      -webkit-text-fill-color: #1f252c;
+      text-fill-color: #1f252c;
+      color: #1f252c;
+    }
+    .right-text {
+      width: 400px;
+    }
+    .right span {
+      font-size: 10px;
+      font-family: "Kanit";
+      font-weight: 400;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+      color: grey;
+      margin-bottom: 24px;
+    }
+    .button {
+      background-color: #4caf50;
+      border: none;
+      color: white;
+      padding: 16px 50px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      transition-duration: 0.4s;
+      cursor: pointer;
+      border: 2px solid red;
+      border-radius: 25px;
+    }
+    .button1 {
+      align-items: right;
+      background-color: #1f252c;
+      color: white;
+      border: 2px solid #1f252c;
+    }
+
+    .button1:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .heading-large {
+      font-size: 120px;
+      font-weight: 700;
+      margin-bottom: 0;
+    }
+    .text {
+      /* font-weight: 400; */
+      letter-spacing: 4.8px;
+      text-transform: uppercase;
+      font-family: "Kanit";
+      font-size: 8px;
+      fill: #111;
+      /* text-shadow: 2px 0px #ccc; */
+    }
+
+    .caption_text {
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+      font-family: "Kanit";
+      font-size: 12px;
+      color: grey;
+    }
+
+    #rotatingText {
+      padding-top: 70px;
+      animation-name: rotate-circle;
+      animation-duration: 60s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      grid-area: 1 / 1;
+    }
+
+    @keyframes rotate-circle {
+      to {
+        transform: rotate(1turn);
+      }
+    }
+
+    .main {
+      display: grid;
+      align-items: center;
+      justify-items: center;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+    }
+
+    .main .fileupload {
+      width: 65%;
+      height: 65%;
+      object-fit: cover;
+      grid-area: 1 / 1;
+    }
+    .p {
+      margin-top: -500px;
+      z-index: 1;
+      margin-left: 100px;
+      font-weight: 500;
+      color: black;
+    }
+
+    label {
+      /* display: block; */
+      margin-bottom: 5px;
+    }
+    .p input[type="file"] {
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    /* about section */
+    .about {
+      padding-top: 100px;
+      padding-bottom: 40px;
+      background: black;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+    .about-header h2 {
+      font-size: 60px;
+      margin-bottom: 20px;
+    }
+    .about-text {
+      text-align: center;
+      width: 700px;
+
+      line-height: 40px;
+      letter-spacing: -0.4px;
+      font-size: 28px;
+    }
+    .icons-tag {
+      margin-top: 160px;
+      margin-bottom: 200px;
+    }
+    hr {
+      width: 100%;
+      height: 0;
+      color: gray;
+    }
+
+    /* audio extract section */
+    .quality {
+      padding-top: 100px;
+      padding-bottom: 40px;
+      background: black;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+    .quality-header h2 {
+      font-size: 60px;
+      margin-bottom: 50px;
+    }
+    .box-container {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      margin-right: 100px;
+    }
+    .box {
+      height: 200px;
+      width: 700px;
+      background-color: gray;
+      justify-content: flex-end;
+      margin: 7px;
+    }
+
+    .box-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      margin: 20px;
+      gap: 10px;
+    }
+    .box-inside {
+      display: flex;
+    }
+    .box-content img {
+      height: 40px;
+      width: 40px;
+      cursor: pointer;
+    }
+
+    hr {
+      width: 100%;
+      height: 0;
+      color: gray;
+    }
+    /* footer section */
+    .footer {
+      background: black;
+      display: flex;
+      justify-content: space-between;
+      color: white;
+      padding: 50px 0px;
+      height: 70vh;
+    }
+    .container {
+      width: 1400px;
+    }
+    .top {
+      display: flex;
+      justify-content: space-around;
+    }
+    .item {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .icons {
+      align-items: center;
+    }
+
+    .fa {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 30px;
+      width: 45px;
+      text-align: center;
+      text-decoration: none;
+      background-color: gray;
+      color: white;
+    }
+    .fa:hover {
+      opacity: 0.7;
+    }
+    .bottom {
+      margin-left: 130px;
+      display: flex;
+      margin-top: 60px;
+      align-items: center;
+    }
+    .bottom span {
+      margin-left: 20px;
+    }
+  </style>
   <body class="body">
     <header>
       <a href="#" class="logo" target="_blank">
@@ -101,77 +347,177 @@
         </ul>
       </nav>
     </header>
+    <div class="home" id="home">
+      <div class="left">
+        <input
+          class="fileupload"
+          type="image"
+          src="assets/images/circular.png"
+          width="400"
+          height="400"
+        />
 
-    <!-- Divide Screen into two equal parts -->
-    <div class="split left">
-      <div class="centered">
-        <div class="main">
-          <input
-            class="fileupload"
-            type="image"
-            src="assets/images/circular.png"
-            width="450"
-            height="450"
-          />
-          <p class="p">
-            <label for="soundFile"></label>
-            <input type="file" id="soundFile" accept="audio/*" />
-          </p>
-          <input type="file" id="my_file" style="display: none" />
-          <svg id="rotatingText" viewBox="0 0 200 200" width="500" height="500">
-            <defs>
-              <path
-                id="circle"
-                d="M 100, 100
-                            m -75, 0
-                            a 75, 75 0 1, 0 150, 0
-                            a 75, 75 0 1, 0 -150, 0
-                            "
-              ></path>
-            </defs>
-            <text width="500">
-              <textPath
-                alignment-baseline="top"
-                xlink:href="#circle"
-                class="text"
-              >
-                • UPLOAD A TRACK • UPLOAD A TRACK • UPLOAD A TRACK •
-              </textPath>
-            </text>
-          </svg>
-        </div>
-
-        <!-- display text in light grey color -->
-        <div class="caption_text">
-          <p>
+        <svg id="rotatingText" viewBox="0 0 200 200" width="500" height="500">
+          <defs>
+            <path
+              id="circle"
+              d="M 100, 100
+                        m -75, 0
+                        a 75, 75 0 1, 0 150, 0
+                        a 75, 75 0 1, 0 -150, 0
+                        "
+            ></path>
+          </defs>
+          <text width="500">
+            <textPath
+              alignment-baseline="top"
+              xlink:href="#circle"
+              class="text"
+            >
+              • UPLOAD A TRACK • UPLOAD A TRACK • UPLOAD A TRACK •
+            </textPath>
+          </text>
+        </svg>
+        <div class="left-text">
+          <span>
             We support mp3, wav, flac, aiff, aif, mp4a, and m4a formats. For the
             best results, upload in high resolution.
-          </p>
+          </span>
         </div>
       </div>
-    </div>
-
-    <div class="split right">
-      <div class="centered">
-        <h1 class="align-right">Get Your Stems</h1>
-        <p class="description">
-          For sync licensing, sampling, remastering, remixing, and re-imagining.
-        </p>
-        <style>
-          .description {
-            font-size: 10px;
-            font-family: "Kanit";
-            font-weight: 400;
-            letter-spacing: 1.1px;
-            text-transform: uppercase;
-            color: grey;
-            margin-bottom: 24px;
-          }
-        </style>
-
+      <div class="right">
+        <h1>GET</h1>
+        <h1>YOUR</h1>
+        <h1>STEMS</h1>
+        <div class="right-text">
+          <span>
+            For sync licensing, sampling, remastering, remixing, and
+            re-imagining.
+          </span>
+        </div>
         <button class="button button1">TRY FOR FREE</button>
       </div>
     </div>
-  
+    <!-- about section -->
+    <div class="about">
+      <div class="about-header">
+        <h2>What is lalal.com?</h2>
+      </div>
+      <div class="about-text">
+        <span>
+          A next-generation vocal remover and music source separation service
+          for fast, easy and precise stem extraction. Remove vocal,
+          instrumental, drums, bass, piano, electric guitar, acoustic guitar,
+          and synthesizer tracks without quality loss.
+        </span>
+      </div>
+      <div class="icons-tag">
+        <img src="https://s.lalal.ai/img/home/logo_ai.svg" alt="image tag" />
+      </div>
+    </div>
+    <hr />
+    <!-- audio extract section  -->
+    <div class="quality">
+      <div class="quality-header">
+        <h2>Check the quality for yourself</h2>
+      </div>
+      <div class="box-container">
+        <div class="box">
+          <div class="box-content">
+            <div class="box-inside">
+              <img src="/play.png" alt="" id="playbtn" />
+              <span style="font-size: 30px">Sample</span>
+            </div>
+
+            <div id="waveform"></div>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="box-content">
+            <div class="box-inside">
+              <img src="/play.png" alt="" id="playbtn" />
+              <span style="font-size: 30px">Sample</span>
+            </div>
+
+            <div id="waveform"></div>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="box-content">
+            <div class="box-inside">
+              <img src="/play.png" alt="" id="playbtn" />
+              <span style="font-size: 30px">Sample</span>
+            </div>
+
+            <div id="waveform"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <!-- Footer section -->
+    <div class="footer">
+      <div class="container">
+        <div class="top">
+          <div class="icons">
+            <h2>follow us</h2>
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fab fa-instagram"></a>
+            <a href="#" class="fa fab fa-github"></a>
+          </div>
+          <div class="item">
+            <h2>Explore</h2>
+            <span>Help</span>
+            <span>Pricing</span>
+            <span>For Business</span>
+            <span>Tools & API</span>
+            <span>Support</span>
+            <span>Affiliate Program</span>
+          </div>
+          <div class="item">
+            <h2>Company</h2>
+            <span>About</span>
+            <span>Blog</span>
+            <span>Media Kit</span>
+            <span> Press </span>
+          </div>
+        </div>
+        <div class="bottom">
+          <span>© 2023 OmniSale GMBH</span>
+          <span>Terms of service</span>
+          <span>Privacy policy</span>
+          <span>Refund Policy</span>
+        </div>
+      </div>
+    </div>
   </body>
+  <script>
+    var playbtn = document.getElementById("playbtn");
+    var wavesurfer = WaveSurfer.create({
+      container: "#waveform",
+      waveColor: "white",
+      progressColor: "yellow",
+      barWidth: 0.9,
+      height: 50,
+      barRedius: 4,
+    });
+    wavesurfer.load(
+      "https://s.lalal.ai/music/home/Lets_Call_it_by_LawrenceTrailer_cut.mp3"
+    );
+    playbtn.onclick = function () {
+      wavesurfer.playPause();
+      if (playbtn.src.includes("play.png")) {
+        playbtn.src = "/pause.png";
+      } else {
+        playbtn.src = "/play.png";
+      }
+      wavesurfer.on("finish", function () {
+        playbtn.src = "/play.png";
+        wavesurfer.stop();
+      });
+    };
+  </script>
 </html>
