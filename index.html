@@ -203,7 +203,7 @@
       color: white;
     }
     .about-header h2 {
-      font-size: 60px;
+      font-size: 4rem;
       margin-bottom: 20px;
     }
     .about-text {
@@ -236,14 +236,14 @@
       color: white;
     }
     .quality-header h2 {
-      font-size: 60px;
+      font-size: 4rem;
       margin-bottom: 50px;
     }
     .box-container {
       width: 100%;
       height: auto;
       display: flex;
-      flex-direction: row;
+
       justify-content: flex-end;
       flex-wrap: wrap;
       margin-right: 100px;
@@ -320,9 +320,118 @@
       display: flex;
       margin-top: 60px;
       align-items: center;
+      justify-content: center;
     }
     .bottom span {
       margin-left: 20px;
+    }
+
+    /* responsive for mobile devices */
+    /* about section */
+    @media screen and (max-width: 768px) {
+      .about-header h2 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+      .about-text {
+        text-align: center;
+        width: 500px;
+
+        line-height: 40px;
+        letter-spacing: -0.4px;
+        font-size: 22px;
+      }
+      .icons-tag {
+        margin-top: 160px;
+        margin-bottom: 200px;
+      }
+    }
+    @media screen and (max-width: 480px) {
+      .about-header h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+      .about-text {
+        text-align: center;
+        width: 350px;
+
+        line-height: 40px;
+        letter-spacing: -0.4px;
+        font-size: 18px;
+      }
+      .icons-tag {
+        margin-top: 160px;
+        margin-bottom: 200px;
+      }
+    }
+
+    /* audio extract section */
+    @media screen and (max-width: 768px) {
+      .quality-header h2 {
+        font-size: 2.5rem;
+        margin-bottom: 50px;
+      }
+      .box-container {
+        width: 100%;
+        height: auto;
+        display: flex;
+        margin-left: 100px;
+        justify-content: center;
+      }
+      .box {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    @media screen and (max-width: 480px) {
+      .quality-header h2 {
+        font-size: 1.5rem;
+        margin-bottom: 50px;
+      }
+      .box {
+        width: 100%;
+      }
+
+      .box-content {
+        margin: 10px;
+      }
+
+      .box-content img {
+        height: 30px;
+        width: 30px;
+      }
+
+      .box-inside span {
+        font-size: 20px;
+      }
+    }
+    /* footer */
+    @media screen and (max-width: 768px) {
+      .fa {
+        margin-top: 20px;
+        padding: 10px;
+        font-size: 30px;
+        width: 40px;
+        text-align: center;
+        text-decoration: none;
+        background-color: gray;
+        color: white;
+      }
+      .item h2 {
+        font-size: 20px;
+      }
+      .bottom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* width: 60%; */
+        flex: content;
+      
+      }
+      .bottom span {
+        font-size: 10px;
+      }
     }
   </style>
   <body class="body">
@@ -429,7 +538,6 @@
               <span style="font-size: 30px">Sample</span>
             </div>
             <div id="waveform"></div>
-            
           </div>
         </div>
 

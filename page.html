@@ -32,7 +32,7 @@
       align-items: flex-start;
       justify-content: flex-start;
     }
-    .page-back span{
+    .page-back span {
       font-size: 17px;
     }
     .page-container {
@@ -112,10 +112,10 @@
     .box-inside {
       display: flex;
     }
-    .box-inside span{
+    .box-inside span {
       font-size: 20px;
     }
-   
+
     .box-content img {
       height: 25px;
       width: 25px;
@@ -176,6 +176,17 @@
     .mute {
       display: none;
     }
+    /* responsive for devices */
+    @media screen and (max-width: 768px) {
+      .page-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+    }
   </style>
   <body>
     <div class="page">
@@ -197,7 +208,7 @@
         </div>
         <div class="page-right">
           <div class="page-right-header">
-            <img src="play.png" alt="" id="playbtn"/>
+            <img src="play.png" alt="" id="playbtn" />
             <div id="duration">00:00</div>
             <div id="last-duration">/ 01:00</div>
           </div>
@@ -206,7 +217,7 @@
               <div class="box-content">
                 <div class="box-inside">
                   <img src="/drum.png" alt="" />
-                  <span >Drums</span>
+                  <span>Drums</span>
                 </div>
 
                 <div id="waveform"></div>
@@ -226,8 +237,8 @@
             <div class="box">
               <div class="box-content">
                 <div class="box-inside">
-                  <img src="/musical-note.png" alt=""  />
-                  <span >without Drums</span>
+                  <img src="/musical-note.png" alt="" />
+                  <span>without Drums</span>
                 </div>
 
                 <div id="waveform"></div>
