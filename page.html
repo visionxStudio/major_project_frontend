@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="components/stylesheets/page.css" />
     <title>Document</title>
   </head>
+
   <body>
     <div class="page">
       <div class="page-back">
@@ -34,7 +35,9 @@
           <div class="page-right-header">
             <img src="play.png" alt="" id="playbtn" />
             <div id="duration">00:00</div>
-            <div id="last-duration">/ 01:00</div>
+
+            <div class="line"><span>/</span></div>
+            <div id="last-duration"></div>
           </div>
           <div class="box-container">
             <div class="box">
@@ -44,17 +47,30 @@
                   <span>Drums</span>
                 </div>
 
-                <div id="waveform"></div>
+                <div id="waveform">
+                  <div id="point-duration"></div>
+                </div>
               </div>
             </div>
           </div>
           <div class="volume-controller">
             <div class="volume">
               <div class="mike">
-                <a href=""><img src="volume-mute.png" alt="" /></a>
+                <a href="" id="volume-icon"
+                  ><img src="volume-mute.png" alt=""
+                /></a>
               </div>
-              <input type="range" class="range" value="0" min="0" max="100" />
-              <span id="pervalue"></span>
+              <input
+                type="range"
+                class="range"
+                value="0"
+                min="0"
+                max="100"
+                id="volume"
+              />
+              <span id="pervalue">
+                <div id="point-duration"></div>
+              </span>
             </div>
           </div>
           <div class="box-container">
@@ -65,7 +81,9 @@
                   <span>without Drums</span>
                 </div>
 
-                <div id="waveform"></div>
+                <div id="waveform">
+                  <div id="point-duration"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -83,18 +101,63 @@
     </div>
   </body>
   <script>
+    // Waveform script
     var playbtn = document.getElementById("playbtn");
+    var currentElement = document.getElementById("duration");
+    var durationElement = document.getElementById("last-duration");
+    var volumeRange = document.getElementById("volume");
+    var pointDurationElement = document.getElementById("point-duration");
+    var waveformContainer = document.getElementById("waveform");
     var wavesurfer = WaveSurfer.create({
       container: "#waveform",
-      waveColor: "white",
-      progressColor: "yellow",
+      waveColor: "#bbbabb",
+      progressColor: "#f8d231",
       barWidth: 0.9,
       height: 50,
-      barRedius: 4,
+      partialRender: true,
     });
-    wavesurfer.load(
-      "https://s.lalal.ai/music/home/Lets_Call_it_by_LawrenceTrailer_cut.mp3"
-    );
+    // song can upload from here
+    wavesurfer.load("music-1.mp3");
+
+    // to make pont duration when cursor move and show dynamically
+    wavesurfer.on("ready", function () {
+      var durationInSeconds = wavesurfer.getDuration();
+
+      waveformContainer.addEventListener("mousemove", function (event) {
+        var containerRect = waveformContainer.getBoundingClientRect();
+        var offsetX = event.clientX - containerRect.left;
+        var progress = offsetX / containerRect.width;
+        var currentTimeInSeconds = progress * durationInSeconds;
+        var formattedCurrentTime = formatTime(currentTimeInSeconds);
+
+        pointDurationElement.textContent = formattedCurrentTime;
+        pointDurationElement.style.left = offsetX + "px";
+      });
+
+      waveformContainer.addEventListener("mouseenter", function () {
+        pointDurationElement.style.visibility = "visible";
+        pointDurationElement.style.opacity = 1;
+      });
+
+      waveformContainer.addEventListener("mouseleave", function () {
+        pointDurationElement.style.visibility = "hidden";
+        pointDurationElement.style.opacity = 0;
+      });
+    });
+
+    //song play format according to the waveform
+    wavesurfer.on("audioprocess", function () {
+      var currentTimeInSeconds = wavesurfer.getCurrentTime();
+      var formattedCurrentTime = formatTime(currentTimeInSeconds);
+      currentElement.textContent = formattedCurrentTime;
+    });
+    // song duration time
+    wavesurfer.on("ready", function () {
+      var durationInSeconds = wavesurfer.getDuration();
+      var formattedDuration = formatTime(durationInSeconds);
+      durationElement.textContent = formattedDuration;
+    });
+    // play pause function
     playbtn.onclick = function () {
       wavesurfer.playPause();
       if (playbtn.src.includes("play.png")) {
@@ -107,28 +170,32 @@
         wavesurfer.stop();
       });
     };
-
-    // for volume button
-
-    var line = document.getElementsByTagName("input")[0];
-    line.addEventListener("mousemove", function () {
+    // Set volume range value to 100 initially
+    volumeRange.value = 100;
+    // time format time function
+    function formatTime(timeInSeconds) {
+      var minutes = Math.floor(timeInSeconds / 60);
+      var seconds = Math.floor(timeInSeconds % 60);
+      var formattedTime = `${minutes.toString().padStart(2, "0")}:${seconds
+        .toString()
+        .padStart(2, "0")}`;
+      return formattedTime;
+    }
+    // volume increase and decrease functionality
+    var line = document.getElementById("volume");
+    line.addEventListener("input", function () {
       var pervalue = document.getElementById("pervalue");
-      var sp = document.getElementsByTagName("span")[0];
+      var volumeIcon = document.getElementById("volume-icon");
+
       if (line.value == 0) {
         pervalue.innerHTML = "";
-        var sound = document.getElementsByClassName("sound");
-        for (var i = 0; i < sound.length; i++) {
-          sound[i].style.display = "none";
-        }
-        document.getElementById("mute").style.display = "block";
-      }
-      if (line.value > 0) {
+        volumeIcon.querySelector("img").src = "volume-mute.png";
+        wavesurfer.setVolume(0);
+      } else {
         pervalue.innerHTML = line.value;
-        var sound = document.getElementsByClassName("sound");
-        for (var i = 0; i < sound.length; i++) {
-          sound[i].style.display = "none";
-        }
-        document.getElementById("mute").style.display = "none";
+        volumeIcon.querySelector("img").src = "unmute.png";
+        var volume = line.value / 100;
+        wavesurfer.setVolume(volume);
       }
     });
   </script>

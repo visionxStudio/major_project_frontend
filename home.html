@@ -170,8 +170,9 @@
                         <img src="play.png" alt="" id="playbtn" />
                         <span style="font-size: 30px">Sample</span>
                     </div>
-
+                   
                     <div id="waveform"></div>
+                    <div id="duration">00:00</div>
                 </div>
             </div>
 
@@ -237,31 +238,48 @@
     </div>
 </body>
 <script>
-    var playbtn = document.getElementById("playbtn");
+       var playbtn = document.getElementById("playbtn");
+    var currentElement = document.getElementById("duration");
+   
     var wavesurfer = WaveSurfer.create({
-        container: "#waveform",
-        waveColor: "white",
-        progressColor: "yellow",
-        barWidth: 0.9,
-        height: 50,
-        barRedius: 4,
+      container: "#waveform",
+      waveColor: "#bbbabb",
+      progressColor: "#f8d231",
+      barWidth: 0.9,
+      height: 50,
+      barRedius: 4,
     });
-
-    wavesurfer.load(
-        "https://s.lalal.ai/music/home/Lets_Call_it_by_LawrenceTrailer_cut.mp3"
-    );
+    // song can upload from here
+    wavesurfer.load("music-1.mp3");
+    //song play format according to the waveform
+    wavesurfer.on("audioprocess", function () {
+      var currentTimeInSeconds = wavesurfer.getCurrentTime();
+      var formattedCurrentTime = formatTime(currentTimeInSeconds);
+      currentElement.textContent = formattedCurrentTime;
+    });
+    // song duration time
+   
+    // play pause function
     playbtn.onclick = function () {
-        wavesurfer.playPause();
-        if (playbtn.src.includes("play.png")) {
-            playbtn.src = "/pause.png";
-        } else {
-            playbtn.src = "/play.png";
-        }
-        wavesurfer.on("finish", function () {
-            playbtn.src = "/play.png";
-            wavesurfer.stop();
-        });
+      wavesurfer.playPause();
+      if (playbtn.src.includes("play.png")) {
+        playbtn.src = "/pause.png";
+      } else {
+        playbtn.src = "/play.png";
+      }
+      wavesurfer.on("finish", function () {
+        playbtn.src = "/play.png";
+        wavesurfer.stop();
+      });
     };
+    function formatTime(timeInSeconds) {
+      var minutes = Math.floor(timeInSeconds / 60);
+      var seconds = Math.floor(timeInSeconds % 60);
+      var formattedTime = `${minutes.toString().padStart(2, "0")}:${seconds
+        .toString()
+        .padStart(2, "0")}`;
+      return formattedTime;
+    }
 </script>
 
 </body>
