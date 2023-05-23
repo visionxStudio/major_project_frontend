@@ -343,7 +343,8 @@ hr {
   width: 100%;
   height: auto;
   display: flex;
-
+  color: black;
+  font-weight: 500;
   justify-content: flex-end;
   flex-wrap: wrap;
   margin-right: 100px;
@@ -351,7 +352,7 @@ hr {
 .box {
   height: 200px;
   width: 700px;
-  background-color: gray;
+  background-color: #e8e8e8;
   justify-content: flex-end;
   margin: 7px;
 }
@@ -365,6 +366,11 @@ hr {
 }
 .box-inside {
   display: flex;
+}
+.box-inside span{
+  margin-top: -8px;
+  font-weight: 500;
+ 
 }
 .box-content img {
   height: 40px;
@@ -390,7 +396,7 @@ hr {
   padding-top: 5%;
   width: 1400px;
 }
-h2{
+h2 {
   padding-bottom: 0;
 }
 .top {
@@ -407,7 +413,6 @@ h2{
 }
 
 .fa {
-  
   margin-top: 20px;
   padding: 15px;
   font-size: 30px;
@@ -562,7 +567,6 @@ a {
     margin-top: 30px;
   }
   .bottom span {
-   
   }
 }
 @media screen and (max-width: 480px) {

@@ -179,22 +179,24 @@
             <div class="box">
                 <div class="box-content">
                     <div class="box-inside">
-                        <img src="play.png" alt="" id="playbtn" />
-                        <span style="font-size: 30px">Sample</span>
+                        <img src="play.png" alt="" id="playbtn1" />
+                        <span style="font-size: 30px">Instrument</span>
                     </div>
 
-                    <div id="waveform"></div>
+                    <div id="waveform1"></div>
+                    <div id="duration1">00:00</div>
                 </div>
             </div>
 
             <div class="box">
                 <div class="box-content">
                     <div class="box-inside">
-                        <img src="play.png" alt="" id="playbtn" />
-                        <span style="font-size: 30px">Sample</span>
+                        <img src="play.png" alt="" id="playbtn2" />
+                        <span style="font-size: 30px">Vocal</span>
                     </div>
 
-                    <div id="waveform"></div>
+                    <div id="waveform2"></div>
+                    <div id="duration2">00:00</div>
                 </div>
             </div>
         </div>
@@ -238,6 +240,7 @@
     </div>
 </body>
 <script>
+    // for vocal
        var playbtn = document.getElementById("playbtn");
     var currentElement = document.getElementById("duration");
    
@@ -280,8 +283,101 @@
         .padStart(2, "0")}`;
       return formattedTime;
     }
-</script>
 
+ 
+</script>
+<script>
+   // for instrument
+   var playbtn1 = document.getElementById("playbtn1");
+    var currentElement1 = document.getElementById("duration1");
+   
+    var wavesurfer1 = WaveSurfer.create({
+      container: "#waveform1",
+      waveColor: "#bbbabb",
+      progressColor: "#f8d231",
+      barWidth: 0.9,
+      height: 50,
+      barRedius: 4,
+    });
+    // song can upload from here
+   wavesurfer1.load("music-1.mp3");
+    //song play format according to the waveform
+   wavesurfer1.on("audioprocess", function () {
+      var currentTimeInSeconds =wavesurfer1.getCurrentTime();
+      var formattedCurrentTime = formatTime(currentTimeInSeconds);
+      currentElement1.textContent = formattedCurrentTime;
+    });
+    // song duration time
+   
+    // play pause function
+    playbtn1.onclick = function () {
+     wavesurfer1.playPause();
+      if (playbtn1.src.includes("play.png")) {
+        playbtn1.src = "/pause.png";
+      } else {
+        playbtn1.src = "/play.png";
+      }
+     wavesurfer1.on("finish", function () {
+        playbtn1.src = "/play.png";
+       wavesurfer1.stop();
+      });
+    };
+    function formatTime(timeInSeconds) {
+      var minutes = Math.floor(timeInSeconds / 60);
+      var seconds = Math.floor(timeInSeconds % 60);
+      var formattedTime = `${minutes.toString().padStart(2, "0")}:${seconds
+        .toString()
+        .padStart(2, "0")}`;
+      return formattedTime;
+    }
+
+</script>
+<script>
+    // for vocal
+    var playbtn2 = document.getElementById("playbtn2");
+    var currentElement2 = document.getElementById("duration2");
+   
+    var wavesurfer2 = WaveSurfer.create({
+      container: "#waveform2",
+      waveColor: "#bbbabb",
+      progressColor: "#f8d231",
+      barWidth: 0.9,
+      height: 50,
+      barRedius: 4,
+    });
+    // song can upload from here
+   wavesurfer2.load("music-1.mp3");
+    //song play format according to the waveform
+   wavesurfer2.on("audioprocess", function () {
+      var currentTimeInSeconds =wavesurfer2.getCurrentTime();
+      var formattedCurrentTime = formatTime(currentTimeInSeconds);
+      currentElement2.textContent = formattedCurrentTime;
+    });
+    // song duration time
+   
+    // play pause function
+    playbtn2.onclick = function () {
+     wavesurfer2.playPause();
+      if (playbtn2.src.includes("play.png")) {
+        playbtn2.src = "/pause.png";
+      } else {
+        playbtn1.src = "/play.png";
+      }
+     wavesurfer2.on("finish", function () {
+        playbtn2.src = "/play.png";
+       wavesurfer2.stop();
+      });
+    };
+    function formatTime(timeInSeconds) {
+      var minutes = Math.floor(timeInSeconds / 60);
+      var seconds = Math.floor(timeInSeconds % 60);
+      var formattedTime = `${minutes.toString().padStart(2, "0")}:${seconds
+        .toString()
+        .padStart(2, "0")}`;
+      return formattedTime;
+    }
+
+</script>
 </body>
 
 </html>
